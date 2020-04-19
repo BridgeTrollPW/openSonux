@@ -8,6 +8,7 @@ class MiddlewareInvocation
 {
 public:
     virtual void invoke(Request *request, Response *response) = 0;
+    virtual ~MiddlewareInvocation(){};
 };
 
 #endif

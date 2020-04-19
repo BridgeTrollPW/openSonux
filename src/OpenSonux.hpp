@@ -1,28 +1,20 @@
 #ifndef __OPEN_SONUX_H__
 #define __OPEN_SONUX_H__
 
-#include "HeaderProcessor.hpp"
+#include "HeaderList.hpp"
+#include "MiddlewareStack.hpp"
+#include <iostream>
 
 class OpenSonux final
 {
 private:
-    HeaderProcessor *headers;
+    HeaderList *headerList;
 
 public:
-    OpenSonux(char **envp)
-    {
-        headers = new HeaderProcessor(envp);
-    }
-    ~OpenSonux()
-    {
-        delete headers;
-    }
+    OpenSonux(char **envp);
+    ~OpenSonux();
 
     void run();
-
-    HeaderProcessor *getHeaders() const {
-        return headers;
-    };
 };
 
 #endif

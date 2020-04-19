@@ -7,21 +7,16 @@
 class MiddlewareStack
 {
 public:
-    MiddlewareStack register(MiddlewareInvocation *middleware)
-    {
-        middlewares.push(middleware);
-    }
+    static MiddlewareStack &getInstance();
+    MiddlewareStack(MiddlewareStack const&) = delete;
+    void operator=(MiddlewareStack const&)  = delete;
 
-    void execute()
-    {
-        while (!middlewares.empty())
-        {
-            middleware.top()->invoke(nullptr, nullptr);
-            middleware.pop();
-        }
-    }
+    void push(MiddlewareInvocation *middleware);
+    void execute();
 
 private:
+    MiddlewareStack() {}
+
     std::stack<MiddlewareInvocation *> middlewares;
 };
 

@@ -1,6 +1,21 @@
-#include "src/OpenSonux.hpp"
+#include <memory>
 
-int main(int argc, char *argv[], char *envp[]){
+#include "src/OpenSonux.hpp"
+#include "impl/ExampleMiddleware.hpp"
+#include "lib/easyloggingcpp/easylogging++.h"
+
+INITIALIZE_EASYLOGGINGPP
+
+int main(int argc, char *argv[], char *envp[])
+{
+    el::Configurations conf("/home/luis/checkout/openSonux/app.conf");
+    el::Loggers::reconfigureLogger("default", conf);
+    el::Loggers::reconfigureAllLoggers(conf);
+
     OpenSonux openSonux(envp);
+    std::unique_ptr<ExampleMiddleware> a = std::make_unique<ExampleMiddleware>();
+    MiddlewareStack::getInstance().push(a.get());
+    MiddlewareStack::getInstance().push(a.get());
+
     openSonux.run();
 }
