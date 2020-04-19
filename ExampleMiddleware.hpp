@@ -10,7 +10,7 @@ class ExampleMiddleware : public MiddlewareInvocation
 public:
     void invoke(Request *request, Response *response)
     {
-        if (request->getHeader("token") == nullptr)
+        if (request->getHeader("token") == nullptr || (*request->getHeader("token")).length() < 1)
         {
             LOG(WARNING) << "Token was not in the request";
             response->status(new http::Status(401, "Unauthorized"))->entity("{\"message\": \"token is missing\"}");
