@@ -8,7 +8,8 @@ INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char *argv[], char *envp[])
 {
-    el::Configurations conf("/home/luis/checkout/openSonux/app.conf");
+
+    el::Configurations conf("/var/www/opensonux.intern/app.conf");
     el::Loggers::reconfigureLogger("default", conf);
     el::Loggers::reconfigureAllLoggers(conf);
 

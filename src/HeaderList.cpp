@@ -16,7 +16,7 @@ HeaderList::HeaderList(char **envp)
         if (key.starts_with("HTTP"))
         {
             LOG(DEBUG) << "Adding http header " << key;
-            key = key.substr(4);
+            key = key.substr(5);
             size_t start_pos = key.find("_");
             if (start_pos != std::string::npos)
             {

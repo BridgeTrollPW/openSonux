@@ -15,10 +15,11 @@ OpenSonux::~OpenSonux()
 void OpenSonux::run()
 {
     MiddlewareStack::getInstance().execute();
-    std::cout << "content-type: application/json\n\n";
+    std::cout << "Status: 201 CREATED\r\n";
+    std::cout << "content-type: application/json\r\n\n";
     std::cout << "{}";
-    std::cout << "Token header: " << headerList->get("token");
-    if(headerList->get("token") == NULL){
-        std::cout << "Token header is null";
+    std::cout << "Connection header: " << *headerList->get("Connection");
+    if(headerList->get("Connection") == NULL){
+        std::cout << "Connection header is empty/null";
     }
 }
