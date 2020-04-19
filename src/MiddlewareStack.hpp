@@ -7,17 +7,14 @@
 class MiddlewareStack
 {
 public:
-    static MiddlewareStack &getInstance();
-    MiddlewareStack(MiddlewareStack const&) = delete;
-    void operator=(MiddlewareStack const&)  = delete;
-
+MiddlewareStack(Request &request, Response &response);
     void push(MiddlewareInvocation *middleware);
     void execute();
 
 private:
-    MiddlewareStack() {}
-
     std::stack<MiddlewareInvocation *> middlewares;
+    Request *request;
+    Response *response;
 };
 
 #endif

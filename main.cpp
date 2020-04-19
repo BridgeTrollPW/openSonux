@@ -1,6 +1,7 @@
 #include <memory>
 
 #include "src/OpenSonux.hpp"
+#include "src/MiddlewareStack.hpp"
 #include "impl/ExampleMiddleware.hpp"
 #include "lib/easyloggingcpp/easylogging++.h"
 

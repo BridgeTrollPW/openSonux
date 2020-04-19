@@ -1,25 +1,19 @@
 #include "OpenSonux.hpp"
-#include "HeaderList.hpp"
+
+#include "MiddlewareStack.hpp"
 #include "../lib/easyloggingcpp/easylogging++.h"
 
 OpenSonux::OpenSonux(char **envp)
 {
     LOG(DEBUG) << "Starting OpenSonux";
-    headerList = new HeaderList(envp);
+    request = new Request(envp);
 }
 OpenSonux::~OpenSonux()
 {
-    delete headerList;
+    delete request;
 }
 
 void OpenSonux::run()
 {
     MiddlewareStack::getInstance().execute();
-    std::cout << "Status: 201 CREATED\r\n";
-    std::cout << "content-type: application/json\r\n\n";
-    std::cout << "{}";
-    std::cout << "Connection header: " << *headerList->get("Connection");
-    if(headerList->get("Connection") == NULL){
-        std::cout << "Connection header is empty/null";
-    }
 }

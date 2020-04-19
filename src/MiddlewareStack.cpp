@@ -2,12 +2,6 @@
 
 #include "../lib/easyloggingcpp/easylogging++.h"
 
-MiddlewareStack &MiddlewareStack::getInstance()
-{
-    static MiddlewareStack instance;
-    return instance;
-}
-
 void MiddlewareStack::push(MiddlewareInvocation *middleware)
 {
     middlewares.push(middleware);

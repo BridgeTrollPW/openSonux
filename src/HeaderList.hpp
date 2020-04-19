@@ -8,8 +8,10 @@ class HeaderList final
 {
 public:
     HeaderList(char **envp);
+    HeaderList();
     void add(std::string key, std::string value);
     std::string* get(std::string key);
+    std::string build();
     
 private:
     std::map<std::string, std::string> headers;
