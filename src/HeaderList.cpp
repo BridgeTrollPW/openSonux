@@ -17,7 +17,7 @@ HeaderList::HeaderList(char **envp)
 
         if (key.starts_with("HTTP"))
         {
-            LOG(DEBUG) << "Adding http header " << key;
+            LOG(DEBUG) << "Adding http header " << key << " : " << value;
             key = key.substr(5);
             size_t start_pos = key.find("_");
             if (start_pos != std::string::npos)
@@ -27,7 +27,7 @@ HeaderList::HeaderList(char **envp)
         }
         else
         {
-            LOG(DEBUG) << "Adding env header " << key;
+            LOG(DEBUG) << "Adding env header " << key << " : " << value;
         }
         add(key, value);
     }

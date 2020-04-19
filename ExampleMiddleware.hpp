@@ -18,7 +18,7 @@ public:
         }
         
         LOG(DEBUG) << "my middleware is executed with token: " << *request->getHeader("token");
-        response->entity("{test}");
+        response->entity(std::string("{\"token\": ").append(*request->getHeader("token")));
     }
 
     ~ExampleMiddleware()
