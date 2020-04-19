@@ -8,7 +8,7 @@ src/OpenSonux.cpp \
 src/MiddlewareStack.cpp \
 lib/easyloggingcpp/easylogging++.cpp
 
-OBJ = $(SRC:.cpp=.o)
+OBJ = $(subst .cpp,.o,$(SRC))
 EXEC = openSonux.cgi
 
 all: $(EXEC)
@@ -16,5 +16,16 @@ all: $(EXEC)
 $(EXEC): $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $(OBJ) $(LBLIBS)
 
+depend: .depend
+
+.depend: $(SRC)
+	$(RM) ./.depend
+	$(CXX) $(CXXFLAGS) -MM $^>>./.depend;
+
 clean:
-	rm -rf $(OBJ) $(EXEC)
+	$(RM) $(OBJ)
+
+distclean: clean
+	$(RM) *~ .depend
+
+include .depend

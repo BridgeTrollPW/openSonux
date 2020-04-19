@@ -34,6 +34,8 @@ public:
 
     Response *status(http::Status *code)
     {
+        //avoid memory leak when replacing status code with new pointer -> 
+        //current statusCode will not be deleted and leaked since I have no pointer left to that memory address
         delete this->statusCode;
         this->statusCode = code;
         return this;

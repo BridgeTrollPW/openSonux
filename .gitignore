@@ -33,5 +33,7 @@
 
 *.log
 
+.depend
+
 build/
 .vscode/
