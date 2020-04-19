@@ -4,7 +4,7 @@
 #include <string>
 
 #include "../HeaderList.hpp"
-#include "HTTPStatus.hpp"
+#include "Status.hpp"
 
 //https://tools.ietf.org/html/rfc3875#section-6
 class Response
@@ -12,7 +12,14 @@ class Response
 public:
     Response()
     {
-        headerList = new HeaderList();
+        this->headerList = new HeaderList();
+        this->statusCode = new http::Status(200, "OK");
+    }
+
+    ~Response()
+    {
+        delete headerList;
+        delete statusCode;
     }
 
     std::string *getHeader(const std::string &key)
@@ -27,6 +34,7 @@ public:
 
     Response *status(http::Status *code)
     {
+        delete this->statusCode;
         this->statusCode = code;
         return this;
     }
@@ -47,7 +55,7 @@ public:
             .append(statusCode->reasonPhrase)
             .append("\r\n")
             .append(headerList->build())
-            .append("\r\n\n")
+            .append("\n")
             .append(body);
     }
 
