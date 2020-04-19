@@ -7,7 +7,7 @@
 class MiddlewareStack
 {
 public:
-MiddlewareStack(Request &request, Response &response);
+    MiddlewareStack(Request *request, Response *response);
     void push(MiddlewareInvocation *middleware);
     void execute();
 

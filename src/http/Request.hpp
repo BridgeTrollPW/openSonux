@@ -13,6 +13,11 @@ public:
         headerList = new HeaderList(envp);
     }
 
+    ~Request()
+    {
+        delete headerList;
+    }
+
     std::string *getHeader(const std::string &key)
     {
         return headerList->get(key);

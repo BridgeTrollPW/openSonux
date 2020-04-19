@@ -4,6 +4,8 @@
 #include "HeaderList.hpp"
 #include "../lib/easyloggingcpp/easylogging++.h"
 
+HeaderList::HeaderList(){}
+
 HeaderList::HeaderList(char **envp)
 {
     std::string envLine;
@@ -52,6 +54,16 @@ std::string *HeaderList::get(std::string key)
     {
         return nullptr;
     }
+}
+
+std::string HeaderList::build()
+{
+    std::string headerlines;
+    for(const auto& [key, value] : headers)
+    {
+        headerlines.append(key).append(": ").append(value).append("\r\n");
+    }
+    return headerlines;
 }
 
 const std::string CGIEnvironment::CONTEXT_PREFIX = "CONTEXT_PREFIX";

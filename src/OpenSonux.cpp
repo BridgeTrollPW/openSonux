@@ -7,13 +7,24 @@ OpenSonux::OpenSonux(char **envp)
 {
     LOG(DEBUG) << "Starting OpenSonux";
     request = new Request(envp);
+    response = new Response();
+    middlewareStack = new MiddlewareStack(request, response);
 }
+
 OpenSonux::~OpenSonux()
 {
     delete request;
+    delete response;
+    delete middlewareStack;
 }
 
 void OpenSonux::run()
 {
-    MiddlewareStack::getInstance().execute();
+    middlewareStack->execute();
+    std::cout << response->build();
+}
+
+MiddlewareStack *OpenSonux::getMiddlewareStack()
+{
+    return middlewareStack;
 }
