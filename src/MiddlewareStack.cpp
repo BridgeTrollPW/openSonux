@@ -1,6 +1,6 @@
 #include "MiddlewareStack.hpp"
 
-#include "../lib/easyloggingcpp/easylogging++.h"
+#include "easylogging++.h"
 
 MiddlewareStack::MiddlewareStack(Request *request, Response *response)
 {

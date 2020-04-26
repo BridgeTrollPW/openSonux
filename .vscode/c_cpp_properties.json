@@ -3,16 +3,20 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/lib/**"
+                "${workspaceFolder}/",
+                "${workspaceFolder}/src/",
+                "${workspaceFolder}/src/interceptor/",
+                "${workspaceFolder}/src/http/",
+                "${workspaceFolder}/src/router/",
+                "${workspaceFolder}/lib/",
+                "${workspaceFolder}/lib/easyloggingcpp"
             ],
             "defines": [],
             "cStandard": "c11",
             "configurationProvider": "vector-of-bool.cmake-tools",
             "compilerPath": "/usr/bin/clang++",
             "intelliSenseMode": "clang-x64",
-            "cppStandard": "c++20"
+            "cppStandard": "c++17"
         }
     ],
     "version": 4

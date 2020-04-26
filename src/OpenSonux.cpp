@@ -1,7 +1,7 @@
 #include "OpenSonux.hpp"
 
 #include "MiddlewareStack.hpp"
-#include "../lib/easyloggingcpp/easylogging++.h"
+#include "easylogging++.h"
 
 OpenSonux::OpenSonux(char **envp)
 {

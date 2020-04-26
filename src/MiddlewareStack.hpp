@@ -2,7 +2,7 @@
 #define __MIDDLEWARE_STACK_H__
 
 #include <stack>
-#include "contracts/MiddlewareInvocation.hpp"
+#include "MiddlewareInvocation.hpp"
 
 class MiddlewareStack
 {

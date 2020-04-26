@@ -2,7 +2,7 @@
 #include <locale>
 
 #include "HeaderList.hpp"
-#include "../lib/easyloggingcpp/easylogging++.h"
+#include "easylogging++.h"
 
 HeaderList::HeaderList(){}
 
@@ -15,7 +15,7 @@ HeaderList::HeaderList(char **envp)
         std::string key = envLine.substr(0, envLine.find_first_of("="));
         std::string value = envLine.substr(envLine.find_first_of("=") + 1);
 
-        if (key.starts_with("HTTP"))
+        if (key.rfind("HTTP", 0) == 0)
         {
             LOG(DEBUG) << "Adding http header " << key << " : " << value;
             key = key.substr(5);

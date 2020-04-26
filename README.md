@@ -4,3 +4,6 @@ CGI based REST-Framework, designed to easily run on application servers like apa
 
 # CGI Specialities
 * permissions need to be set up correctly for write actions to work, e.g. logging to file
+
+# TODOs
+*

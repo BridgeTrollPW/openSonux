@@ -1,8 +1,14 @@
 #ifndef __OPEN_SONUX_H__
 #define __OPEN_SONUX_H__
 
-#include "http/Request.hpp"
+#include "Request.hpp"
 #include "MiddlewareStack.hpp"
+#include "Router.hpp"
+
+/**
+ * @brief 
+ * 
+ */
 class OpenSonux final
 {
 public:
@@ -17,6 +23,7 @@ private:
     Request *request;
     Response *response;
     MiddlewareStack *middlewareStack;
+    Router *router;
 };
 
 #endif

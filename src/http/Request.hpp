@@ -5,8 +5,8 @@
 #include <iostream>
 #include <algorithm>
 
-#include "../HeaderList.hpp"
-#include "../../lib/easyloggingcpp/easylogging++.h"
+#include "HeaderList.hpp"
+#include "easylogging++.h"
 
 class Request
 {
