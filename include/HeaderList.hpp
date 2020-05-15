@@ -1,13 +1,13 @@
-#ifndef __HEADER_LIST__H__
-#define __HEADER_LIST__H__
+#ifndef HEADERLIST_HPP
+#define HEADERLIST_HPP
 
-#include <string>
 #include <map>
+#include <string>
 
 class HeaderList final
 {
 public:
-    HeaderList(char **envp);
+    explicit HeaderList(char **envp);
     HeaderList();
     void add(std::string key, std::string value);
     std::string* get(std::string key);
