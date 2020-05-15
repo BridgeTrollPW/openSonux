@@ -4,12 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/",
-                "${workspaceFolder}/src/",
-                "${workspaceFolder}/src/interceptor/",
-                "${workspaceFolder}/src/http/",
-                "${workspaceFolder}/src/router/",
+                "${workspaceFolder}/source/",
+                "${workspaceFolder}/include/",
                 "${workspaceFolder}/lib/",
-                "${workspaceFolder}/lib/easyloggingcpp"
+                "${workspaceFolder}/lib/easyloggingcpp",
+                "${workspaceFolder}/implementation/"
             ],
             "defines": [],
             "cStandard": "c11",

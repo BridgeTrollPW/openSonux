@@ -3,7 +3,7 @@
 
 INITIALIZE_EASYLOGGINGPP
 
-int main(int argc, char *argv[], char *envp[])
+auto main(int argc, char *argv[], char *envp[]) -> int
 {
     el::Configurations conf("app.conf");
     el::Loggers::reconfigureLogger("default", conf);
