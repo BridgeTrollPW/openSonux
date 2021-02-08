@@ -1,6 +1,7 @@
-#ifndef __RESPONSE_H__
-#define __RESPONSE_H__
+#ifndef RESPONSE_HPP
+#define RESPONSE_HPP
 
+#include <memory>
 #include <string>
 
 #include "HeaderList.hpp"
@@ -12,14 +13,8 @@ class Response
 public:
     Response()
     {
-        this->headerList = new HeaderList();
-        this->statusCode = new http::Status(200, "OK");
-    }
-
-    ~Response()
-    {
-        delete headerList;
-        delete statusCode;
+        this->headerList = std::make_unique<HeaderList>();
+        this->statusCode = std::make_unique<http::Status>(200, "OK");
     }
 
     std::string *getHeader(const std::string &key)
@@ -36,8 +31,7 @@ public:
     {
         //avoid memory leak when replacing status code with new pointer -> 
         //current statusCode will not be deleted and leaked since I have no pointer left to that memory address
-        delete this->statusCode;
-        this->statusCode = code;
+        this->statusCode.reset(code);
         return this;
     }
 
@@ -62,9 +56,9 @@ public:
     }
 
 private:
-    HeaderList *headerList;
+    std::unique_ptr<HeaderList> headerList;
     std::string body;
-    http::Status *statusCode;
+    std::unique_ptr<http::Status> statusCode;
 };
 
 #endif

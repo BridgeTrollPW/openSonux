@@ -1,8 +1,9 @@
-#ifndef __ROUTE_WRAPPER_H__
-#define __ROUTE_WRAPPER_H__
+#ifndef ROUTEWRAPPER_HPP
+#define ROUTEWRAPPER_HPP
 
-#include <string>
 #include <functional>
+#include <string>
+
 #include "Request.hpp"
 #include "Response.hpp"
 

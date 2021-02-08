@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.0.0)
 project(openSonux VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_CLANG_TIDY
-    clang-tidy;
+    clang-tidy-10;
     -header-filter=include/.;
-    -checks=*;)
+    -checks=*,-modernize-use-trailing-return-type;)
 
 include(CTest)
 enable_testing()

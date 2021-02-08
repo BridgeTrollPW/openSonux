@@ -1,9 +1,10 @@
-#ifndef __REQUEST_H__
-#define __REQUEST_H__
+#ifndef REQUEST_HPP
+#define REQUEST_HPP
 
-#include <string>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <memory>
+#include <string>
 
 #include "HeaderList.hpp"
 #include "easylogging++.h"
@@ -11,14 +12,9 @@
 class Request
 {
 public:
-    Request(char **envp, const std::string& _body) : body(_body)
+    Request(char **envp, std::string _body) : body(std::move(_body))
     {
-        headerList = new HeaderList(envp);
-    }
-
-    ~Request()
-    {
-        delete headerList;
+        headerList = std::make_unique<HeaderList>(envp);
     }
 
     std::string *getHeader(const std::string &key)
@@ -27,7 +23,7 @@ public:
     }
 
 private:
-    HeaderList *headerList;
+    std::unique_ptr<HeaderList> headerList;
     const std::string body;
 };
 

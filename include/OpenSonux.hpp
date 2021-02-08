@@ -1,8 +1,8 @@
-#ifndef __OPEN_SONUX_H__
-#define __OPEN_SONUX_H__
+#ifndef OPENSONUX_HPP
+#define OPENSONUX_HPP
 
-#include "Request.hpp"
 #include "MiddlewareStack.hpp"
+#include "Request.hpp"
 #include "Router.hpp"
 
 /**
@@ -12,7 +12,7 @@
 class OpenSonux final
 {
 public:
-    OpenSonux(char **envp);
+    explicit OpenSonux(char **envp);
     ~OpenSonux();
 
     MiddlewareStack *getMiddlewareStack();

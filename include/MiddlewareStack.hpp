@@ -1,7 +1,8 @@
-#ifndef __MIDDLEWARE_STACK_H__
-#define __MIDDLEWARE_STACK_H__
+#ifndef MIDDLEWARESTACK_HPP
+#define MIDDLEWARESTACK_HPP
 
 #include <stack>
+
 #include "MiddlewareInvocation.hpp"
 
 class MiddlewareStack
