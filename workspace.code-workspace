@@ -68,6 +68,22 @@
             "streambuf": "cpp",
             "thread": "cpp",
             "typeinfo": "cpp"
-        }
-    }
+        },
+        "telemetry.enableCrashReporter": false,
+        "telemetry.enableTelemetry": false,
+        "C_Cpp.clang_format_sortIncludes": true,
+        "C_Cpp.codeFolding": "Disabled",
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.experimentalFeatures": "Enabled",
+        "C_Cpp.intelliSenseEngineFallback": "Enabled"
+    },
+    "extensions": {
+        "recommendations": [
+            "visualstudioexptteam.vscodeintellicode"
+        ]
+    },
+    "recommendations": [
+        "visualstudioexptteam.vscodeintellicode",
+        "dotjoshjohnson.xml"
+    ]
 }
