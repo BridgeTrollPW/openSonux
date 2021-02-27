@@ -1,6 +1,5 @@
 #ifndef HTTPMETHOD_HPP
 #define HTTPMETHOD_HPP
-#include "Router.hpp"
 
 enum HTTPMethod {
   POST,

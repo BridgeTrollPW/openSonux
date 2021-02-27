@@ -28,21 +28,24 @@ void EmbeddedServer::start() {
     clintConnt = accept(clintListn, (struct sockaddr *)NULL, NULL);
 
     connectionPool.push(std::async(std::launch::async, [&]() -> int {
-      Session session;
-      LOG(TRACE) << "[" << session.getId() << "]"
-                 << "Handling async client request\n";
-      if (clintConnt < 0) {
-        LOG(ERROR) << "[" << session.getId() << "]"
-                   << "ERROR on accept\n";
-      }
       int n;
       bzero(buffer, 256);
       n = read(clintConnt, buffer, 255);
+      std::string bufferString(buffer);
+      Session session(bufferString);
+      
+      LOG(TRACE) << "[" << session.getId() << "]"
+                 << "Handling async client request";
+      
+      if (clintConnt < 0) {
+        LOG(ERROR) << "[" << session.getId() << "]"
+                   << "ERROR on accept";
+      }
+
       if (n < 0) {
         LOG(ERROR) << "[" << session.getId() << "]"
-                   << "ERROR reading from socket\n";
+                   << "ERROR reading from socket";
       }
-      printf("Here is the message: \n%s\n", buffer);
 
       const char *response =
           "HTTP/1.1 200 OK \r\nContent-Type: application/json "
@@ -54,7 +57,7 @@ void EmbeddedServer::start() {
 
       close(clintConnt);
       LOG(TRACE) << "[" << session.getId() << "]"
-                 << "Client connection closed\n";
+                 << "Client connection closed";
       return SessionState::DONE;
     }));
   }

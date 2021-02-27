@@ -17,7 +17,7 @@
 #include <sys/types.h> //contains a number of basic derived types that should be used whenever appropriate
 #include <unistd.h>    //contains various constants
 
-class EmbeddedServer {
+class EmbeddedServer final {
 private:
   char *buffer;
   int clintListn = 0, clintConnt = 0;

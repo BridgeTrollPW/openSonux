@@ -3,18 +3,14 @@
 
 #include <memory>
 
-#include "OpenSonux.hpp"
-#include "ExampleMiddleware.hpp"
+#include "EmbeddedServer.hpp"
 
-class Application
-{
+class Application {
 public:
-    Application(char **envp)
-    {
-        OpenSonux openSonux{envp};
-        openSonux.getMiddlewareStack()->push(new ExampleMiddleware());
-        openSonux.run();
-    }
+  Application(char **envp) {
+    EmbeddedServer embeddedServer;
+    embeddedServer.start();
+  }
 };
 
 #endif
