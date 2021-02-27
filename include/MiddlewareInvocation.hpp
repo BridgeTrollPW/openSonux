@@ -4,11 +4,10 @@
 #include "Request.hpp"
 #include "Response.hpp"
 
-class MiddlewareInvocation
-{
+class MiddlewareInvocation {
 public:
-    virtual void invoke(Request *request, Response *response) = 0;
-    virtual ~MiddlewareInvocation() = default;
+  virtual void invoke(Request *request, Response *response) = 0;
+  virtual ~MiddlewareInvocation(){};
 };
 
 #endif

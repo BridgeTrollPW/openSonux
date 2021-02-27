@@ -4,19 +4,22 @@
 #include <functional>
 #include <string>
 
+#include "HTTPMethod.hpp"
 #include "Request.hpp"
 #include "Response.hpp"
+#include "Router.hpp"
+
 
 class RouteWrapper
 {
 private:
-    std::string httpMethod;
+    HTTPMethod httpMethod;
     std::string path;
     std::function<void(Request *, Response *)> invocation;
 
 public:
-    RouteWrapper(const std::string &_httpMethod, const std::string &_path, std::function<void(Request *, Response *)> _invocation)
-        : httpMethod(_httpMethod), path(_path), invocation(_invocation) {}
+    RouteWrapper(const HTTPMethod &_httpMethod, const std::string &_path, const std::function<void(Request *, Response *)> &_invocation)
+        : httpMethod(std::move(_httpMethod)), path(std::move(_path)), invocation(std::move(_invocation)) {}
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "Router.hpp"
 #include <functional>
 
-void Router::add(const std::string &httpMethod, const std::string &path, std::function<void(Request *, Response *)> invocation)
+void Router::add(const HTTPMethod &httpMethod, const std::string &path, std::function<void(Request *, Response *)> invocation)
 {
     routes.push_back(new RouteWrapper(httpMethod, path, invocation));
 }

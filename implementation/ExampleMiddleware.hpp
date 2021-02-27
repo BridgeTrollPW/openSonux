@@ -1,18 +1,20 @@
-#ifndef __EXAMPLE_MIDDLEWARE_H__
-#define __EXAMPLE_MIDDLEWARE_H__
+#ifndef EXAMPLEMIDDLEWARE_HPP
+#define EXAMPLEMIDDLEWARE_HPP
+
+#include <memory>
 
 #include "MiddlewareInvocation.hpp"
-#include "Status.hpp"
+#include "ResponseStatus.hpp"
 
 class ExampleMiddleware : public MiddlewareInvocation
 {
 public:
-    void invoke(Request *request, Response *response)
+    void invoke(Request *request, Response *response) override
     {
         if (request->getHeader("token") == nullptr || (*request->getHeader("token")).length() < 1)
         {
             LOG(WARNING) << "Token was not in the request";
-            response->status(new http::Status(401, "Unauthorized"))->entity("{\"message\": \"token is missing\"}");
+            response->status(std::make_unique<ResponseStatus>(std::move(HTTPStatus::UNAUTHORIZED), "Unauthorized"))->entity("{\"message\": \"token is missing\"}");
             return;
         }
         
@@ -20,10 +22,17 @@ public:
         response->entity(std::string("{\"token\": ").append(*request->getHeader("token")));
     }
 
-    ~ExampleMiddleware()
+    ~ExampleMiddleware() override
     {
         LOG(DEBUG) << "destroyed";
     }
+
+    explicit ExampleMiddleware() = default;
+    ExampleMiddleware(const ExampleMiddleware&) = delete;
+    ExampleMiddleware(ExampleMiddleware&&) = delete;
+    ExampleMiddleware& operator=(const ExampleMiddleware&) = delete;
+    ExampleMiddleware& operator=(ExampleMiddleware&&) = delete;
+
 };
 
 #endif

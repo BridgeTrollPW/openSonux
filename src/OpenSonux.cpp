@@ -1,11 +1,14 @@
 #include "OpenSonux.hpp"
 
+#include "EmbeddedServer.hpp"
 #include "MiddlewareStack.hpp"
 #include "easylogging++.h"
 
 OpenSonux::OpenSonux(char **envp)
 {
     LOG(TRACE) << "Starting OpenSonux";
+    EmbeddedServer embeddedServer;
+    embeddedServer.start();
     std::string body;
     if (getenv("CONTENT_LENGTH") != nullptr)
     {
