@@ -1,7 +1,9 @@
 #include "EmbeddedServer.hpp"
-#include "Session.hpp"
+#include "HttpSession.hpp"
 #include "easylogging++.h"
+#include <cerrno>
 #include <cstdio>
+#include <cstring>
 #include <future>
 
 EmbeddedServer::EmbeddedServer() {
@@ -18,47 +20,38 @@ void EmbeddedServer::start() {
   if (bind(clintListn, (struct sockaddr *)&ipOfServer, sizeof(ipOfServer)) <
       0) {
     char log[30];
-    snprintf(log, 30, "ERROR binding to socket %d\n", errno);
+    snprintf(log, 30, "ERROR binding to socket %d::%s", errno,
+             strerror(errno));
     LOG(ERROR) << log;
     return;
   }
   listen(clintListn, 20);
   while (1) {
-    LOG(TRACE) << "Waiting for connection\n";
     clintConnt = accept(clintListn, (struct sockaddr *)NULL, NULL);
-
+    if (clintConnt < 0) {
+      LOG(ERROR) << "ERROR on accept:" << errno << "::" << strerror(errno);
+      continue;
+    }
     connectionPool.push(std::async(std::launch::async, [&]() -> int {
       int n;
       bzero(buffer, 256);
-      n = read(clintConnt, buffer, 255);
+      if (read(clintConnt, buffer, 255) == -1) {
+        LOG(ERROR) << "ERROR on read: " << errno << "::" << strerror(errno);
+        return HTTPSessionState::TCPSOCKET_SERVER_READ_ERROR;
+      }
       std::string bufferString(buffer);
-      Session session(bufferString);
-      
-      LOG(TRACE) << "[" << session.getId() << "]"
-                 << "Handling async client request";
-      
-      if (clintConnt < 0) {
-        LOG(ERROR) << "[" << session.getId() << "]"
-                   << "ERROR on accept";
+      HTTPSession httpSession(bufferString);
+
+      const std::string response = httpSession.getResponse()->build();
+      if (write(clintConnt, response.c_str(), response.size()) == -1) {
+        LOG(ERROR) << "ERROR on write: " << errno << "::" << strerror(errno);
+        return HTTPSessionState::TCPSOCKET_SERVER_WRITE_ERROR;
       }
 
-      if (n < 0) {
-        LOG(ERROR) << "[" << session.getId() << "]"
-                   << "ERROR reading from socket";
+      if (close(clintConnt) == -1) {
+        LOG(ERROR) << "ERROR on close:" << errno << "::" << strerror(errno);
       }
-
-      const char *response =
-          "HTTP/1.1 200 OK \r\nContent-Type: application/json "
-          "\r\nContent-Length: 0 \r\n\r\n";
-      n = write(clintConnt, response, strlen(response));
-      if (n < 0) {
-        printf("ERROR writing to socket %d\n", errno);
-      }
-
-      close(clintConnt);
-      LOG(TRACE) << "[" << session.getId() << "]"
-                 << "Client connection closed";
-      return SessionState::DONE;
+      return HTTPSessionState::DONE;
     }));
   }
 }

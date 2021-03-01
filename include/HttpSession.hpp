@@ -1,20 +1,30 @@
-#ifndef SESSION_HPP
-#define SESSION_HPP
+#ifndef HTTPSESSION_HPP
+#define HTTPSESSION_HPP
 #include "Request.hpp"
+#include "Response.hpp"
 #include <random>
 #include <string>
-enum SessionState { STARTED, DONE };
+enum HTTPSessionState { STARTED, DONE, TCPSOCKET_SERVER_READ_ERROR, TCPSOCKET_SERVER_WRITE_ERROR };
 
-class Session {
+class HTTPSession {
 private:
   std::string id;
   Request *request;
+  Response *response;
 
 public:
-  Session(std::string &rawRequest) {
+  HTTPSession(std::string &rawRequest) {
     id = generateSessionId(64);
     request = new Request(rawRequest);
+    response = new Response();
+    response->addHeader("Content-Type", "application/json");
+    response->entity("[1,2,3,4,5,{\"test\": false}]");
   }
+
+  const Response* getResponse() const{
+      return response;
+  }
+
   std::string generateSessionId(std::size_t length) {
     const std::string CHARACTERS =
         "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

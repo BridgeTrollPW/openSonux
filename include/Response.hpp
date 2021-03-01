@@ -38,12 +38,13 @@ public:
 
   Response *entity(const std::string &body) {
     this->body = body;
+    this->addHeader("Content-Length", std::to_string(body.size()));
     return this;
   }
 
-  std::string build() {
-    std::string response;
-    return response.append("Status: ")
+  const std::string build() const {
+    std::string httpResponse;
+    httpResponse.append("HTTP/1.1 ")
         .append(std::to_string(statusCode->getCode()))
         .append(" ")
         .append(statusCode->getReasonPhrase())
@@ -51,6 +52,7 @@ public:
         .append(headerList->build())
         .append("\r\n")
         .append(body);
+    return httpResponse;
   }
 };
 

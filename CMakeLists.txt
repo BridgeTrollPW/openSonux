@@ -31,10 +31,9 @@ file(GLOB_RECURSE IMPL RELATIVE ${CMAKE_SOURCE_DIR} "imlpementation/*.cpp")
 
 add_executable(openSonux main.cpp ${SOURCES} ${LIB} ${IMPL})
 
-target_compile_options(openSonux PRIVATE -Werror)
+target_compile_options(openSonux PRIVATE -Werror -fno-omit-frame-pointer -fsanitize=address)
 target_compile_features(openSonux PRIVATE cxx_std_17)
-target_link_libraries(openSonux Threads::Threads)
-
+target_link_libraries(openSonux Threads::Threads -lasan -lubsan)
 ##################################################
 #
 ##################################################
