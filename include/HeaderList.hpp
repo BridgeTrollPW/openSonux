@@ -1,6 +1,7 @@
 #ifndef HEADERLIST_HPP
 #define HEADERLIST_HPP
 
+#include "Logger.hpp"
 #include <map>
 #include <string>
 
@@ -15,6 +16,7 @@ public:
     
 private:
     std::map<std::string, std::string> headers;
+    Logger log{"HeaderList"};
 };
 
 class CGIEnvironment final

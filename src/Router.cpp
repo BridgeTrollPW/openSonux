@@ -1,4 +1,4 @@
-#include "Router.hpp"
+#include "../include/Router.hpp"
 #include <functional>
 
 void Router::add(const HTTPMethod &httpMethod, const std::string &path, std::function<void(Request *, Response *)> invocation)

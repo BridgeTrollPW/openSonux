@@ -1,4 +1,4 @@
-#include "MiddlewareStack.hpp"
+#include "../include/MiddlewareStack.hpp"
 
 MiddlewareStack::MiddlewareStack(Request *request, Response *response)
 {
@@ -9,7 +9,7 @@ MiddlewareStack::MiddlewareStack(Request *request, Response *response)
 void MiddlewareStack::push(MiddlewareInvocation *middleware)
 {
     middlewares.push(middleware);
-    LOG(TRACE) << "Added " << typeid(*middleware).name();
+    log.trace("Added %s to middleware stack",  typeid(*middleware).name());
 }
 
 void MiddlewareStack::execute()
@@ -17,7 +17,7 @@ void MiddlewareStack::execute()
     while (!middlewares.empty())
     {
         MiddlewareInvocation *invocation = middlewares.top();
-        LOG(TRACE) << "Execute " << typeid(*invocation).name();
+        log.trace("Execute and pop %s",  typeid(*invocation).name());
         invocation->invoke(request, response);
         middlewares.pop();
         delete invocation;

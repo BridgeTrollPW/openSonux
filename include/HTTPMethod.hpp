@@ -1,7 +1,7 @@
 #ifndef HTTPMETHOD_HPP
 #define HTTPMETHOD_HPP
 
-enum HTTPMethod {
+enum class HTTPMethod {
   POST,
   GET,
   PATCH,

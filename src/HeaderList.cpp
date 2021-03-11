@@ -1,7 +1,8 @@
+#include <algorithm>
 #include <iostream>
 #include <locale>
 
-#include "HeaderList.hpp"
+#include "../include/HeaderList.hpp"
 
 HeaderList::HeaderList(){}
 
@@ -16,7 +17,7 @@ HeaderList::HeaderList(char **envp)
 
         if (key.rfind("HTTP", 0) == 0)
         {
-            LOG(DEBUG) << "Adding http header " << key << " : " << value;
+            log.trace("Adding http header %s : %s", key.c_str(), value.c_str());
             key = key.substr(5);
             size_t start_pos = key.find("_");
             if (start_pos != std::string::npos)
@@ -26,7 +27,7 @@ HeaderList::HeaderList(char **envp)
         }
         else
         {
-            LOG(DEBUG) << "Adding env header " << key << " : " << value;
+            log.trace("Adding env header %s : %s", key.c_str(), value.c_str());
         }
         add(key, value);
     }

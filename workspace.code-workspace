@@ -1,8 +1,8 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
+    "folders": [
+        {
+            "path": "."
+        }
     ],
     "settings": {
         "files.associations": {
@@ -67,7 +67,9 @@
             "stop_token": "cpp",
             "streambuf": "cpp",
             "thread": "cpp",
-            "typeinfo": "cpp"
+            "typeinfo": "cpp",
+            "future": "cpp",
+            "cerrno": "cpp"
         },
         "telemetry.enableCrashReporter": false,
         "telemetry.enableTelemetry": false,
@@ -75,6 +77,11 @@
         "C_Cpp.codeFolding": "Disabled",
         "C_Cpp.default.cppStandard": "c++17",
         "C_Cpp.experimentalFeatures": "Enabled",
+        "C_Cpp.clang_format_style": "Google",
+        "C_Cpp.intelliSenseEngine": "Disabled",
+        "C_Cpp.default.includePath": [
+            "${workspaceFolder}/include"
+        ],
         "C_Cpp.intelliSenseEngineFallback": "Enabled"
     },
     "extensions": {

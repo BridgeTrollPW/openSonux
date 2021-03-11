@@ -1,6 +1,7 @@
 #ifndef EMBEDDEDSERVER_HPP
 #define EMBEDDEDSERVER_HPP
 
+#include "Logger.hpp"
 #include <arpa/inet.h> // defines in_addr structure
 #include <cerrno> //It defines macros for reporting and retrieving error conditions through error codes
 #include <cstddef>
@@ -23,7 +24,7 @@ private:
   int clintListn = 0, clintConnt = 0;
   struct sockaddr_in ipOfServer;
   std::queue<std::future<int>> connectionPool;
-
+  Logger log{"EmbeddedServer"};
 public:
   EmbeddedServer();
   void start();

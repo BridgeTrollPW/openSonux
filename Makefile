@@ -3,12 +3,12 @@
 #
 CC         = clang++
 TARGET     = openSonux.a
-CFLAGS     = -Wall -Iinclude -Ilib/easyloggingcpp
+CFLAGS     = -Wall -Iinclude
 LINKER     = ar rsv
 SOURCE_DIR = src
 HEADER_DIR = header
-OBJECT_DIR = obj
-BINARY_DIR = bin
+OBJECT_DIR = build/obj
+BINARY_DIR = build/bin
 # Find all source files in the $(SOURCE_DIR)
 SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
 #use substitution $(var:pattern=replacement) to replace all *.cpp files to *.o files to use as dependency

@@ -3,6 +3,7 @@
 
 #include <stack>
 
+#include "Logger.hpp"
 #include "MiddlewareInvocation.hpp"
 
 class MiddlewareStack
@@ -16,6 +17,7 @@ private:
     std::stack<MiddlewareInvocation *> middlewares;
     Request *request;
     Response *response;
+    Logger log{"MiddlewareStack"};
 };
 
 #endif
