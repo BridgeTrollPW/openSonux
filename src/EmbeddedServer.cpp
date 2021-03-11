@@ -1,6 +1,5 @@
 #include "EmbeddedServer.hpp"
 #include "HttpSession.hpp"
-#include "easylogging++.h"
 #include <cerrno>
 #include <cstdio>
 #include <cstring>

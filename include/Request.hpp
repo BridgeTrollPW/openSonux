@@ -11,7 +11,6 @@
 
 #include "HTTPMethod.hpp"
 #include "HeaderList.hpp"
-#include "easylogging++.h"
 
 struct Header {
   const std::string header;

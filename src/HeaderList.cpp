@@ -2,7 +2,6 @@
 #include <locale>
 
 #include "HeaderList.hpp"
-#include "easylogging++.h"
 
 HeaderList::HeaderList(){}
 

@@ -1,7 +1,5 @@
 #include "MiddlewareStack.hpp"
 
-#include "easylogging++.h"
-
 MiddlewareStack::MiddlewareStack(Request *request, Response *response)
 {
     this->request = request;

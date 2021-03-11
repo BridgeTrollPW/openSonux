@@ -7,10 +7,7 @@
 
 class Application {
 public:
-  Application(char **envp) {
-    EmbeddedServer embeddedServer;
-    embeddedServer.start();
-  }
+  Application();
 };
 
 #endif
